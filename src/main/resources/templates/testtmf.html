@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Thymeleaf Web Application</title>
+</head>
+<body>
+    <h1>Welcome to Spring Boot Thymeleaf</h1>
+    <p>Hey there! <th:block th:text="${message}">message</th:block></p>
+    <p>Today is: <span th:text="${message}">13 February 2011</span></p>
+    <h3>Dumping DTO Objects 3</h3>
+    <p th:text="${staff.name}">Staff Name here</p>
+    <p th:text="#{main.demo.message1}">Staff Title here</p>
+    <p>Demonstration </p>
+    <table border="1">
+        <tr th:each="m : ${myList}">
+            <td th:text="${m.name}"/>
+        </tr>
+    </table>
+    <table border="1">
+        <tr th:each="s : ${staffList}">
+            <td th:text="${s.name}"/>
+            <td th:style="${s.score >= uiSettings.veryHighMark } ? 'background: red' : 'background: white' " th:text="${s.score}"/>
+            <td th:style="${s.score >= uiSettings.veryHighMark } ? 'background: red ' : (${s.score >= uiSettings.highMark } ? 'background: blue' : 'background: green') " th:text="${s.score}"/>
+            <td>
+                <th:block th:if="${s.gender eq 'M'}">Male</th:block>
+                <th:block th:unless="${s.gender eq 'M'}">Female</th:block>
+            </td>
+            <td>
+                <div th:switch="${s.gender}">
+                    <p th:case="'F'">Female</p>
+                    <p th:case="'M'">Male</p>
+                    <p th:case="*">Not specified</p>
+                </div>
+            </td>
+            <td>
+                <div th:if="${s.gender == 'M' }">
+                    <div>Welcome, Sir</div>
+                </div>
+                <!-- ELSE -->
+                <div th:unless="${s.gender == 'M' }">
+                    <div th:text=" 'Hi,' + ${s.gender}">Hi, User</div>
+                </div>
+            </td>
+
+        </tr>
+    </table>
+</body>
+</html>
