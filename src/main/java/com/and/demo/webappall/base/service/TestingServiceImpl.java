@@ -21,15 +21,15 @@ public class TestingServiceImpl implements TestingService {
     @Override
     public List<MyDTObject> getStaffList() {
         List<MyDTObject> staffList = new ArrayList<MyDTObject>();
-        staffList.add(new MyDTObject("Anderson","Engineer",1,"M"));
-        staffList.add(new MyDTObject("Jimmy","Engineer",-10,"F"));
-        staffList.add(new MyDTObject("David","Engineer",29,"M"));
+        staffList.add(new MyDTObject("Anderson", "Engineer", 1, "M"));
+        staffList.add(new MyDTObject("Jimmy", "Engineer", -10, "F"));
+        staffList.add(new MyDTObject("David", "Engineer", 29, "M"));
         return staffList;
     }
 
     @Override
     public UISettings getUISettings() {
-        return new UISettings(0,20);
+        return new UISettings(0, 20);
     }
 
     @Override
@@ -65,8 +65,13 @@ public class TestingServiceImpl implements TestingService {
         return list;
     }
 
-    public List<Job> getAllJobs(){
+    public List<Job> getAllJobs() {
         return jobDao.getAll();
     }
+
+    public boolean saveJob(Job j) {
+        return jobDao.saveJob(j)==1;
+    }
+
 
 }

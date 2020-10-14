@@ -26,7 +26,8 @@ public class TestController {
         System.out.println("/api/getAllJobs get called");
         return testingService.getAllJobs();
         //[{"id":1,"description":"清理房間","deadline":"2020-10-16T16:00:00.000+00:00","importance":1,"status":1},{"id":2,"description":"交電費","deadline":"2020-10-17T16:00:00.000+00:00","importance":2,"status":1}]
-        // wrap with ResponseEntity or ReplyObject.
+        // TODO : wrap with ResponseEntity or ReplyObject.
+        // Exception Handling
     }
 
 }

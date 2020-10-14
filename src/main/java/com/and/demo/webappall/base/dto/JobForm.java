@@ -1,13 +1,22 @@
-package com.and.demo.webappall.base.domain;
+package com.and.demo.webappall.base.dto;
 
 import java.util.Date;
-public class Job {
 
+public class JobForm {
+    private String action;
     private int id;
     private String description;
-    private Date deadline;
-    private int importance;
+    private boolean importance;
     private int status;
+    private String deadline;
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 
     public int getId() {
         return id;
@@ -25,19 +34,11 @@ public class Job {
         this.description = description;
     }
 
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-
-    public int getImportance() {
+    public boolean isImportance() {
         return importance;
     }
 
-    public void setImportance(int importance) {
+    public void setImportance(boolean importance) {
         this.importance = importance;
     }
 
@@ -49,11 +50,11 @@ public class Job {
         this.status = status;
     }
 
-    public void dump() {
-        System.out.println("Description is " + description);
-        System.out.println("deadline is " + deadline);
-        System.out.println("importance is " + importance);
-        System.out.println("status is " + status);
+    public String getDeadline() {
+        return deadline;
     }
 
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 }

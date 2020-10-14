@@ -1,5 +1,8 @@
 package com.and.demo.webappall.base.controller;
 
+import com.and.demo.webappall.base.converter.JobDtoDaoConverter;
+import com.and.demo.webappall.base.domain.Job;
+import com.and.demo.webappall.base.dto.JobForm;
 import com.and.demo.webappall.base.dto.LoginInfo;
 import com.and.demo.webappall.base.dto.MyDTObject;
 import com.and.demo.webappall.base.service.TestingService;
@@ -44,17 +47,40 @@ public class TestWebViewController {
         return mv;
     }
 
-    @GetMapping(value="/")
-    public String getDefaultPage(Model m) {
-        System.out.println("Default page GET called");
-        return "main";
+    @GetMapping(value="/main")
+    public ModelAndView getDefaultPage(ModelAndView mv) {
+        System.out.println("/main called");
+        mv.addObject("todoList",testingService.getAllJobs());
+        mv.addObject("jobForm", new JobForm());
+        mv.setViewName("main");
+        return mv;
+    }
+    //https://stackoverflow.com/questions/43079276/how-to-use-redirect-in-modelandview
+
+    @PostMapping(value="/main")
+    public String handleDefaultPageSubmit
+            ( @ModelAttribute("jobForm") JobForm jobForm,
+                                   BindingResult bindingResult) {
+        // TODO : form validation
+        //loginFormValidator.validate(loginInfo,bindingResult);
+        //if (bindingResult.hasErrors()) {
+        //    return "login";
+        //}
+        Job myJob = JobDtoDaoConverter.getJobDaoFromJobForm(jobForm);
+        myJob.dump();
+        boolean isSavingOK =  testingService.saveJob(myJob);
+        System.out.println("Save Job result : " + isSavingOK);
+        return "redirect:/main";
     }
 
 
-    @RequestMapping(value="/landing")
-    public String getLandingPage(Model m) {
+
+    @GetMapping(value="/landing")
+    public ModelAndView getLandingPage(ModelAndView mv) {
         System.out.println("/landing called");
-        return "landing";
+        mv.addObject("todoList",testingService.getAllJobs());
+        mv.setViewName("landing");
+        return mv;
     }
 
     // demonstration of form data submit.
@@ -77,5 +103,7 @@ public class TestWebViewController {
         return "redirect:/";
     }
     */
+
+
 
 }

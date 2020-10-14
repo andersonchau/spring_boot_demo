@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>TODO List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+</style>
+<div class="container">
+    <h2>My Todo List </h2>
+    <p>Be reminded..</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Importance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="job : ${todoList}">
+            <td th:text="${job.id}" >ID</td>
+            <td th:text="${job.description}" >Description</td>
+            <td th:text="${job.deadline}" >Deadline</td>
+            <td>
+                <div th:switch="${job.status}">
+                    <p th:case="1">未做</p>
+                    <p th:case="2">已完成</p>
+                    <p th:case="*">未知</p>
+                </div>
+            </td>
+            <td>
+                <div th:switch="${job.importance}" th:style="${job.importance==2} ? 'background: red' : 'background: white' " >
+                    <p th:case="1">平常</p>
+                    <p th:case="2">重要</p>
+                    <p th:case="*">未知</p>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <hr/>
+    <form th:action="@{/main}" th:object="${jobForm}"  method="post" >
+        <div class="form-group">
+            <label for="description">Job Description:</label>
+            <input type="text" class="form-control" placeholder="Description" id="description" th:field="*{description}">
+        </div>
+        <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="option1" name="option1" class="custom-control-input" value="1" th:field="*{status}">
+                <label class="custom-control-label" for="option1">未完成</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="option2" name="option2" class="custom-control-input" value="2" th:field="*{status}">
+                <label class="custom-control-label" for="option2">已完成</label>
+            </div>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" th:field="*{importance}"`>
+            <label class="form-check-label" for="exampleCheck1">重要</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+
+</body>
+</html>

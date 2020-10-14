@@ -19,6 +19,7 @@ create TABLE todo_list (
 
 
 import com.and.demo.webappall.base.domain.Job;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -28,4 +29,10 @@ public interface JobDao {
     @Select("SELECT tdl_id AS id, description, deadline , status , importance FROM todo_list")
     List<Job> getAll();
 
+    @Insert("INSERT INTO todo_list(description,deadline,status,importance) VALUES" +
+            " (#{description},NOW(),#{status},#{importance})" )
+    int saveJob(Job j);
+
+
 }
+

@@ -12,4 +12,5 @@ public interface TestingService {
     List<MyDTObject> getStaffList();
     UISettings getUISettings();
     List<Job> getAllJobs();
+    boolean saveJob(Job j);
 }
