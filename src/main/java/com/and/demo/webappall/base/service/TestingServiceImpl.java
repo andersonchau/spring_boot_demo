@@ -1,7 +1,10 @@
 package com.and.demo.webappall.base.service;
 
+import com.and.demo.webappall.base.dao.JobDao;
+import com.and.demo.webappall.base.domain.Job;
 import com.and.demo.webappall.base.dto.MyDTObject;
 import com.and.demo.webappall.base.dto.UISettings;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,6 +14,10 @@ import java.util.Map;
 
 @Service
 public class TestingServiceImpl implements TestingService {
+
+    @Autowired
+    private JobDao jobDao;
+
     @Override
     public List<MyDTObject> getStaffList() {
         List<MyDTObject> staffList = new ArrayList<MyDTObject>();
@@ -56,6 +63,10 @@ public class TestingServiceImpl implements TestingService {
         list.add(m);
 
         return list;
+    }
+
+    public List<Job> getAllJobs(){
+        return jobDao.getAll();
     }
 
 }

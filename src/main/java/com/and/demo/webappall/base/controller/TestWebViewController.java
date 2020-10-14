@@ -44,13 +44,26 @@ public class TestWebViewController {
         return mv;
     }
 
+    @GetMapping(value="/")
+    public String getDefaultPage(Model m) {
+        System.out.println("Default page GET called");
+        return "main";
+    }
+
+
+    @RequestMapping(value="/landing")
+    public String getLandingPage(Model m) {
+        System.out.println("/landing called");
+        return "landing";
+    }
+
     // demonstration of form data submit.
     @RequestMapping(value="/login")
     public String getLoginPage(Model m) {
         m.addAttribute("loginInfo",new LoginInfo());
         return "login";
     }
-    
+    /*
     @PostMapping(value="/login")
     public String handleLoginInfo( @ModelAttribute("loginInfo") LoginInfo loginInfo ,
                                     BindingResult bindingResult) {
@@ -63,6 +76,6 @@ public class TestWebViewController {
 
         return "redirect:/";
     }
-
+    */
 
 }

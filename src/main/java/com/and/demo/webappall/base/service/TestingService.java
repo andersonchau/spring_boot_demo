@@ -1,5 +1,6 @@
 package com.and.demo.webappall.base.service;
 
+import com.and.demo.webappall.base.domain.Job;
 import com.and.demo.webappall.base.dto.MyDTObject;
 import com.and.demo.webappall.base.dto.UISettings;
 
@@ -10,4 +11,5 @@ public interface TestingService {
     List<Map<String, Object>>  getListOfHM();
     List<MyDTObject> getStaffList();
     UISettings getUISettings();
+    List<Job> getAllJobs();
 }
