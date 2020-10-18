@@ -72,7 +72,7 @@ public class Job {
         if (deadline != null){
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             deadlineStr = dateFormat.format(deadline);
-        } else{
+        } else {
             deadlineStr = "";
         }
     }

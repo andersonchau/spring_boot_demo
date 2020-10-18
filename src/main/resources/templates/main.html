@@ -53,6 +53,7 @@ hr {
             <th>Deadline</th>
             <th>Status</th>
             <th>Importance</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -74,12 +75,15 @@ hr {
                     <p th:case="*">未知</p>
                 </div>
             </td>
+            <td><button type="button" class="btn btn-secondary" th:onClick="|performDelete(${job.id})|">Delete</button></td>
         </tr>
         </tbody>
     </table>
     <br>
     <hr/>
-    <form th:action="@{/main}" th:object="${jobForm}"  method="post" >
+    <form id="myJobForm" th:action="@{/main}" th:object="${jobForm}"  method="post" >
+        <input type="hidden" value="create" name="actionName" />
+        <input type="hidden" value="0" name="id" />
         <div class="form-group">
             <label for="description">Job Description:</label>
             <input type="text" class="form-control" placeholder="Description" id="description" th:field="*{description}">
@@ -115,6 +119,20 @@ $(document).ready(function(){
         datepicker.init($date);
 });
 
-    </script>
+function performDelete(jobID){
+
+    var form = document.getElementById('myJobForm');
+    if ( form != null ){
+        form.actionName.value = 'delete';
+        form.id.value = jobID;
+        form.submit();
+    } else {
+        console.log('Form is null');
+    }
+    return false;
+
+}
+
+</script>
 </body>
 </html>

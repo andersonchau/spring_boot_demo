@@ -19,9 +19,7 @@ create TABLE todo_list (
 
 
 import com.and.demo.webappall.base.domain.Job;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 @Mapper
@@ -33,6 +31,7 @@ public interface JobDao {
             " (#{description},#{deadline},#{status},#{importance})" )
     int saveJob(Job j);
 
-
+    @Delete("DELETE FROM todo_list where tdl_id = #{id}")
+    int deleteJobById(@Param("id") int jobId );
 }
 

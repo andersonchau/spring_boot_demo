@@ -3,19 +3,20 @@ package com.and.demo.webappall.base.dto;
 import java.util.Date;
 
 public class JobForm {
-    private String action;
+    private String actionName;
     private int id;
     private String description;
     private boolean importance;
     private int status;
     private String deadline;
 
-    public String getAction() {
-        return action;
+
+    public String getActionName() {
+        return actionName;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
     }
 
     public int getId() {

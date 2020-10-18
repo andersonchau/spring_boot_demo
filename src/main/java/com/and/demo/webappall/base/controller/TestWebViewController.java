@@ -5,30 +5,27 @@ import com.and.demo.webappall.base.domain.Job;
 import com.and.demo.webappall.base.dto.JobForm;
 import com.and.demo.webappall.base.dto.LoginInfo;
 import com.and.demo.webappall.base.dto.MyDTObject;
-import com.and.demo.webappall.base.service.TestingService;
+import com.and.demo.webappall.base.service.JobManagementService;
 import com.and.demo.webappall.base.validator.LoginFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class TestWebViewController {
 
-    private TestingService testingService;
+    private JobManagementService jobManagementService;
 
     LoginFormValidator loginFormValidator;
     @Autowired
-    public void setup(TestingService testingService,
+    public void setup(JobManagementService jobManagementService,
                       LoginFormValidator loginFormValidator ){
-        this.testingService = testingService;
+        this.jobManagementService = jobManagementService;
         this.loginFormValidator = loginFormValidator;
     }
 
@@ -39,9 +36,9 @@ public class TestWebViewController {
         // Add a String output
         mv.addObject("message", "From Server");
         mv.addObject("staff",new MyDTObject("Anderson","Engineer",1,"M"));
-        mv.addObject("myList", testingService.getListOfHM());
-        mv.addObject("uiSettings",testingService.getUISettings());
-        mv.addObject("staffList", testingService.getStaffList());
+        mv.addObject("myList", jobManagementService.getListOfHM());
+        mv.addObject("uiSettings", jobManagementService.getUISettings());
+        mv.addObject("staffList", jobManagementService.getStaffList());
         mv.setViewName("testtmf"); // templates/testtmf.html
 
         return mv;
@@ -51,7 +48,7 @@ public class TestWebViewController {
     public ModelAndView getDefaultPage(ModelAndView mv) {
         System.out.println("/main called");
 
-        List<Job> allJobs =testingService.getAllJobs();
+        List<Job> allJobs = jobManagementService.getAllJobs();
         allJobs.forEach(job -> {
                     job.postProcess();
         });
@@ -71,10 +68,18 @@ public class TestWebViewController {
         //if (bindingResult.hasErrors()) {
         //    return "login";
         //}
-        Job myJob = JobDtoDaoConverter.getJobDaoFromJobForm(jobForm);
-        myJob.dump();
-        boolean isSavingOK =  testingService.saveJob(myJob);
-        System.out.println("Save Job result : " + isSavingOK);
+        if ( "create".equals(jobForm.getActionName())) {
+            Job myJob = JobDtoDaoConverter.getJobDaoFromJobForm(jobForm);
+            myJob.dump();
+            boolean isSavingOK = jobManagementService.saveJob(myJob);
+            System.out.println("Save Job result : " + isSavingOK);
+        } else if ( "delete".equals(jobForm.getActionName())) {
+            System.out.println("Going to delete job with Id " + jobForm.getId() );
+            int result = jobManagementService.deleteJobById(jobForm.getId());
+            System.out.println("job delete result " + result );
+        } else {
+            System.out.println("unknown action");
+        }
         return "redirect:/main";
     }
 
@@ -83,7 +88,7 @@ public class TestWebViewController {
     @GetMapping(value="/landing")
     public ModelAndView getLandingPage(ModelAndView mv) {
         System.out.println("/landing called");
-        mv.addObject("todoList",testingService.getAllJobs());
+        mv.addObject("todoList", jobManagementService.getAllJobs());
         mv.setViewName("landing");
         return mv;
     }
