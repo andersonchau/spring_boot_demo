@@ -4,20 +4,44 @@
     <title>TODO List</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-<style>
+    <link rel="stylesheet" href="/bootstrap/all.css" />
+
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
+    <script src="/bootstrap/jquery.js"></script>
+    <script src="/bootstrap/popper.min.js"></script>
+    <script src="/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/widget/simple-date-picker.css" />
+    <script type="text/javascript" src="/widget/simple-date-picker.js"></script>
+
+    <style>
 hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+    .datepicker {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 5px;
+      height: 24px;
+      line-height: 24px;
+      width: 230px;
+    }
+
+    .datepicker:focus {
+      outline: none;
+      border: 1px solid #1abc9c;
+    }
+
+    .btn-red {
+      background: red;
+      color: white;
+    }
 </style>
+</head>
+<body>
+
 <div class="container">
     <h2>My Todo List </h2>
     <p>Be reminded..</p>
@@ -35,7 +59,7 @@ hr {
         <tr th:each="job : ${todoList}">
             <td th:text="${job.id}" >ID</td>
             <td th:text="${job.description}" >Description</td>
-            <td th:text="${job.deadline}" >Deadline</td>
+            <td th:text="${job.deadlineStr}" >Deadline</td>
             <td>
                 <div th:switch="${job.status}">
                     <p th:case="1">未做</p>
@@ -70,6 +94,10 @@ hr {
                 <label class="custom-control-label" for="option2">已完成</label>
             </div>
         </div>
+        <div class="form-group">
+            <label for="description">Deadline</label>
+            <input type="text" class="form-control" placeholder="Deadline" id="date" th:field="*{deadline}">
+        </div>
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1" th:field="*{importance}"`>
             <label class="form-check-label" for="exampleCheck1">重要</label>
@@ -78,6 +106,15 @@ hr {
     </form>
 
 </div>
+<script type="text/javascript">
 
+$(document).ready(function(){
+  var $date = document.querySelector('#date');
+        // initial datepicker with the input Node
+        console.log('going to init date picker');
+        datepicker.init($date);
+});
+
+    </script>
 </body>
 </html>

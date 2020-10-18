@@ -50,7 +50,12 @@ public class TestWebViewController {
     @GetMapping(value="/main")
     public ModelAndView getDefaultPage(ModelAndView mv) {
         System.out.println("/main called");
-        mv.addObject("todoList",testingService.getAllJobs());
+
+        List<Job> allJobs =testingService.getAllJobs();
+        allJobs.forEach(job -> {
+                    job.postProcess();
+        });
+        mv.addObject("todoList",allJobs);
         mv.addObject("jobForm", new JobForm());
         mv.setViewName("main");
         return mv;
@@ -84,10 +89,16 @@ public class TestWebViewController {
     }
 
     // demonstration of form data submit.
-    @RequestMapping(value="/login")
+    @GetMapping(value="/login")
     public String getLoginPage(Model m) {
         m.addAttribute("loginInfo",new LoginInfo());
         return "login";
+    }
+
+
+    @GetMapping(value="/test_resource")
+    public String getTestResourcePage(Model m) {
+        return "test_resources";
     }
     /*
     @PostMapping(value="/login")

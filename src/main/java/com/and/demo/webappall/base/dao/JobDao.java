@@ -30,7 +30,7 @@ public interface JobDao {
     List<Job> getAll();
 
     @Insert("INSERT INTO todo_list(description,deadline,status,importance) VALUES" +
-            " (#{description},NOW(),#{status},#{importance})" )
+            " (#{description},#{deadline},#{status},#{importance})" )
     int saveJob(Job j);
 
 

@@ -1,5 +1,7 @@
 package com.and.demo.webappall.base.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Job {
 
@@ -8,6 +10,8 @@ public class Job {
     private Date deadline;
     private int importance;
     private int status;
+    // a little bit of hacking here
+    private String deadlineStr;
 
     public int getId() {
         return id;
@@ -55,5 +59,23 @@ public class Job {
         System.out.println("importance is " + importance);
         System.out.println("status is " + status);
     }
+
+    public String getDeadlineStr() {
+        return deadlineStr;
+    }
+
+    public void setDeadlineStr(String deadlineStr) {
+        this.deadlineStr = deadlineStr;
+    }
+
+    public void postProcess() {
+        if (deadline != null){
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            deadlineStr = dateFormat.format(deadline);
+        } else{
+            deadlineStr = "";
+        }
+    }
+
 
 }
