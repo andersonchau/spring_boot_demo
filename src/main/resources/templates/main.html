@@ -38,12 +38,25 @@ hr {
       background: red;
       color: white;
     }
+
+    .error {
+      color: red;
+    }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>My Todo List </h2>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <h2><span>My TODO List</span>
+                <a class="btn navbar-btn btn-danger pull-right" role="button" href="/logout">Logout</a>
+            </h2>
+        </div>
+    </div>
+
+
     <p>Be reminded..</p>
     <table class="table">
         <thead>
@@ -82,6 +95,10 @@ hr {
     <br>
     <hr/>
     <form id="myJobForm" th:action="@{/main}" th:object="${jobForm}"  method="post" >
+        <div class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" ></div>
+        <div class="error" th:if="${#fields.hasErrors('status')}" th:errors="*{status}" > </div>
+        <div class="error" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}" > </div>
+
         <input type="hidden" value="create" name="actionName" />
         <input type="hidden" value="0" name="id" />
         <div class="form-group">

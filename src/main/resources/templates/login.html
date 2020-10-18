@@ -33,10 +33,10 @@
     <div class="card"  style="width: 400px" >
         <article class="card-body">
             <h4 class="card-title mb-6 mt-2">Sign in</h4>
-            <div th:if="${param.error}">
+            <div style="color : red;" th:if="${param.error}">
                 Invalid username and password.
             </div>
-            <div th:if="${param.logout}">
+            <div style="color : red;" th:if="${param.logout}">
                 You have been logged out.
             </div>
             <form th:action="@{/login}"  method="post">

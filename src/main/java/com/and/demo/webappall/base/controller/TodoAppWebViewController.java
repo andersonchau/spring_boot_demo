@@ -6,6 +6,7 @@ import com.and.demo.webappall.base.dto.JobForm;
 import com.and.demo.webappall.base.dto.LoginInfo;
 import com.and.demo.webappall.base.dto.MyDTObject;
 import com.and.demo.webappall.base.service.JobManagementService;
+import com.and.demo.webappall.base.validator.JobFormValidator;
 import com.and.demo.webappall.base.validator.LoginFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,16 +18,20 @@ import org.springframework.validation.BindingResult;
 import java.util.List;
 
 @Controller
-public class TestWebViewController {
+public class TodoAppWebViewController {
 
     private JobManagementService jobManagementService;
 
     LoginFormValidator loginFormValidator;
+    JobFormValidator jobFormValidator;
+
     @Autowired
     public void setup(JobManagementService jobManagementService,
-                      LoginFormValidator loginFormValidator ){
+                      LoginFormValidator loginFormValidator,
+                      JobFormValidator jobFormValidator ){
         this.jobManagementService = jobManagementService;
         this.loginFormValidator = loginFormValidator;
+        this.jobFormValidator = jobFormValidator;
     }
 
     // A simple example of how data is transmitted to
@@ -62,13 +67,25 @@ public class TestWebViewController {
     @PostMapping(value="/main")
     public String handleDefaultPageSubmit
             ( @ModelAttribute("jobForm") JobForm jobForm,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult,
+              Model m ) {
         // TODO : form validation
         //loginFormValidator.validate(loginInfo,bindingResult);
         //if (bindingResult.hasErrors()) {
         //    return "login";
         //}
         if ( "create".equals(jobForm.getActionName())) {
+            jobFormValidator.validate(jobForm,bindingResult);
+            if (bindingResult.hasErrors()) {
+                List<Job> allJobs = jobManagementService.getAllJobs();
+                allJobs.forEach(job -> {
+                    job.postProcess();
+                });
+                m.addAttribute("todoList",allJobs);
+                return "main";
+                // what if we have other information to display
+            }
+
             Job myJob = JobDtoDaoConverter.getJobDaoFromJobForm(jobForm);
             myJob.dump();
             boolean isSavingOK = jobManagementService.saveJob(myJob);
