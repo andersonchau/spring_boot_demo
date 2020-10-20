@@ -49,6 +49,55 @@ public class TodoAppWebViewController {
         return mv;
     }
 
+    @GetMapping(value="/search")
+    public ModelAndView getSearchPage(ModelAndView mv) {
+        System.out.println("/search called");
+
+        List<Job> allJobs = jobManagementService.getAllJobs();
+        allJobs.forEach(job -> {
+            job.postProcess();
+        });
+        mv.addObject("todoList",allJobs);
+        mv.addObject("jobForm", new JobForm());
+        mv.setViewName("main");
+        return mv;
+    }
+    /*
+    @PostMapping(value="/search")
+    public String handleSearchFormPost
+            ( @ModelAttribute("jobForm") JobForm jobForm,
+              BindingResult bindingResult,
+              Model m ) {
+        // TODO : form validation
+        if ( "search".equals(jobForm.getActionName())) {
+            jobFormValidator.validate(jobForm,bindingResult);
+            if (bindingResult.hasErrors()) {
+                List<Job> allJobs = jobManagementService.();
+                allJobs.forEach(job -> {
+                    job.postProcess();
+                });
+                m.addAttribute("todoList",allJobs);
+                return "search";
+                // what if we have other information to display
+            }
+
+            Job myJob = JobDtoDaoConverter.getJobDaoFromJobForm(jobForm);
+            myJob.dump();
+            boolean isSavingOK = jobManagementService.saveJob(myJob);
+            System.out.println("Save Job result : " + isSavingOK);
+        } else if ( "delete".equals(jobForm.getActionName())) {
+            System.out.println("Going to delete job with Id " + jobForm.getId() );
+            int result = jobManagementService.deleteJobById(jobForm.getId());
+            System.out.println("job delete result " + result );
+            return "redirect:/search";
+        } else {
+            System.out.println("unknown action search");
+            return "redirect:/search";
+        }
+
+    }
+    */
+
     @GetMapping(value="/main")
     public ModelAndView getDefaultPage(ModelAndView mv) {
         System.out.println("/main called");
@@ -70,10 +119,6 @@ public class TodoAppWebViewController {
                                    BindingResult bindingResult,
               Model m ) {
         // TODO : form validation
-        //loginFormValidator.validate(loginInfo,bindingResult);
-        //if (bindingResult.hasErrors()) {
-        //    return "login";
-        //}
         if ( "create".equals(jobForm.getActionName())) {
             jobFormValidator.validate(jobForm,bindingResult);
             if (bindingResult.hasErrors()) {
@@ -134,7 +179,7 @@ public class TodoAppWebViewController {
         }
 
         return "redirect:/";
-    }
+
     */
 
 

@@ -10,7 +10,6 @@ public class JobForm {
     private int status;
     private String deadline;
 
-
     public String getActionName() {
         return actionName;
     }
@@ -58,4 +57,5 @@ public class JobForm {
     public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
+
 }

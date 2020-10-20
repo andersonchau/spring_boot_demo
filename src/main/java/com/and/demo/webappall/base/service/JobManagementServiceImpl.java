@@ -2,6 +2,8 @@ package com.and.demo.webappall.base.service;
 
 import com.and.demo.webappall.base.dao.JobDao;
 import com.and.demo.webappall.base.domain.Job;
+import com.and.demo.webappall.base.dto.JobForm;
+import com.and.demo.webappall.base.dto.JobSearchForm;
 import com.and.demo.webappall.base.dto.MyDTObject;
 import com.and.demo.webappall.base.dto.UISettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,10 @@ public class JobManagementServiceImpl implements JobManagementService {
 
     public int deleteJobById(int id) {
         return jobDao.deleteJobById(id);
+    }
+
+    public List<Job> searchJob(JobSearchForm jf) {
+        return jobDao.searchJob(jf);
     }
 
 }
