@@ -46,7 +46,7 @@ public class RestAPIController {
 
     @ExceptionHandler(AppResourceNotFoundException.class)
     public ResponseEntity<AppAPIResponse> handleAppResourceNotFound(AppResourceNotFoundException e) {
-        // {"status":"ERROR","errDescription":"Not found job resource","response":null} 
+        // {"status":"ERROR","errDescription":"Not found job resource","response":null}
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new AppAPIResponse("ERROR", e.getMessage(), null));
     }
