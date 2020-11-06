@@ -26,6 +26,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	compileOnly("org.springframework.boot:spring-boot-devtools")
 	implementation 'org.springdoc:springdoc-openapi-ui:1.4.6'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 }
 
