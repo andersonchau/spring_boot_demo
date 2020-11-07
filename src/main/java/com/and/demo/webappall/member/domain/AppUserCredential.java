@@ -1,6 +1,7 @@
 package com.and.demo.webappall.member.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /*
 CREATE TABLE ansontestdb.app_user_credential (
@@ -17,7 +18,7 @@ CREATE TABLE ansontestdb.app_user_credential (
 
 @Entity
 @Table(name = "app_user_credential")
-public class AppUserCredential {
+public class AppUserCredential  implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;

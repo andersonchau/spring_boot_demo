@@ -2,9 +2,10 @@ package com.and.demo.webappall.member.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Set;
 
-public class AppRole {
+public class AppRole implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;

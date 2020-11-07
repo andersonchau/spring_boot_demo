@@ -13,7 +13,7 @@ public class AppUserRepositoryImpl implements AppUserRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void customMethod(){};
+    public void customMethod(){}
 
 
 }

@@ -17,7 +17,7 @@ public class LoginFormValidator  implements Validator
     @Override
     public void validate(Object target, Errors errors) {
         LoginInfo loginInfo = (LoginInfo) target;
-        System.out.println("");
+        System.out.println();
         String u = loginInfo.getUsername();
         String p  = loginInfo.getPassword();
         // use REGEX , now just some logics for demonstration

@@ -20,7 +20,7 @@ public class JobFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         JobForm j = (JobForm) target;
-        System.out.println("");
+        System.out.println();
         String desc = j.getDescription();
         int status = j.getStatus();
         String deadStr = j.getDeadline();
