@@ -10,7 +10,9 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface AppUserRepository extends JpaRepository<AppUser,Long>, AppUserRepositoryCustom {
+public interface AppUserRepository extends
+        JpaRepository<AppUser,Long>,
+        AppUserRepositoryCustom {
     // All Auto-generated query method put here
     // notes, method without body not put to AppUserRepositoryImpl.java but here for
     // ref : https://openhome.cc/Gossip/EJB3Gossip/JPQLABC.html

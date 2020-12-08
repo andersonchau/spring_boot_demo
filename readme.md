@@ -17,4 +17,5 @@ For Memorization of the how-to of commonly used elements in Spring Boot
 6. Spring Security : \src\main\java\com\and\demo\webappall\config\WebSecurityConfig.java<br/> 
 7. MyBatis : src\main\java\com\and\demo\webappall\base\dao<br/> 
 8. FormValidation : \src\main\java\com\and\demo\webappall\base\validator<br/> 
+8. Mongodb CRUD : \src\main\java\com\and\demo\webappall\mongo<br/> 
 

@@ -27,7 +27,7 @@ public class JobFormValidator implements Validator {
         if (StringUtils.isEmpty(desc) ||
                 StringUtils.isBlank(desc)
         ) {
-                errors.rejectValue("description", "error.input.job.mustNotBeBlank");
+            errors.rejectValue("description", "error.input.job.mustNotBeBlank");
         }
         if (status!=1 && status !=2) {
             errors.rejectValue("status", "error.input.job.pleaseSelJobStatus");
