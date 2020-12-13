@@ -3,7 +3,7 @@
 <body>
 <head th:fragment="header">
     <title>TODO List</title>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/bootstrap/all.css" />
 
@@ -15,7 +15,28 @@
     <script type="text/javascript" src="/widget/simple-date-picker.js"></script>
 </head>
 
+<nav th:fragment="mynavbar" class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Todo App</a>
 
+    <!-- Links -->
+    <ul class="navbar-nav">
 
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Language
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/main?lang=chi">Chi</a>
+                <a class="dropdown-item" href="/main?lang=en">Eng</a>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
 </body>
 </html>

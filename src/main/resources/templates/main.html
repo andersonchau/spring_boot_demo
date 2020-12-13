@@ -2,6 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/components :: header"></head>
 <body>
+<navbar th:replace="fragments/components :: mynavbar"></navbar>
 <style>
 hr {
   margin-top: 1rem;
@@ -36,8 +37,8 @@ hr {
 
     <div class="container">
         <div class="row align-items-center">
-            <h2><span>My TODO List - Create</span>
-                <a class="btn navbar-btn btn-danger pull-right" role="button" href="/logout">Logout</a>
+            <h2><span th:text="#{main.todo.title}"></span>
+               <!-- <a class="btn navbar-btn btn-danger pull-right" role="button" href="/logout">Logout</a> -->
             </h2>
         </div>
     </div>
