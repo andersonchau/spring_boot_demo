@@ -24,7 +24,48 @@
 }
 </style>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <meta name="_csrf" data-th-content="${_csrf.token}" />
+    <meta name="_csrf_header" content="X-CSRF-TOKEN"/>
 </head>
+
+<script>
+
+   var csrfToken = $("meta[name='_csrf']").attr("content");
+    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+    $.ajaxSetup({
+        beforeSend: function (xhr) {
+            if(csrfHeader && csrfToken ){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
+        }}
+    );
+
+
+
+$( document ).ready(function() {
+    $.ajax({
+    type: "POST",
+    async: true,
+    dataType: "json",
+    url: "/webapi/greeting",
+    contentType: 'application/json; charset=UTF-8',
+    success: function (json) {
+        var sResult = json.message;
+        console.log('returning result : ' + sResult);
+        $('#div1').html(sResult);
+        },
+	 error: function (request, status, error) {
+        console.log('error occurs ' + status);
+    }
+
+
+
+});
+});
+
+</script>
+
 
 <body class="container">
 <br>  <p class="text-center">Demo System</p>
@@ -57,6 +98,6 @@
         </article>
     </div> <!-- card.// -->
 </div>
-
+<div id="div1"></div>
 </body>
 </html>

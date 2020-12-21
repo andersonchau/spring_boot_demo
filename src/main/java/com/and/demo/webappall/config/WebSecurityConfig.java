@@ -2,6 +2,7 @@ package com.and.demo.webappall.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,11 +18,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http .csrf()
+                .ignoringAntMatchers("/api/**")
+                .and()
                 .authorizeRequests()
                 //.antMatchers( "/api/searchJob","/api/**").permitAll()
-                .antMatchers("/api/**").permitAll()
+                .antMatchers("/webapi/**","/api/**").permitAll()
                 .antMatchers("/fragments/**","/widget/**","/bootstrap/**","/css/**","/js/**","/fonts/**","/images/**","/home").permitAll()
                 .anyRequest().authenticated()
                 .and()

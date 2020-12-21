@@ -1,6 +1,7 @@
 package com.and.demo.webappall.base.controller;
 
 import com.and.demo.webappall.base.domain.Job;
+import com.and.demo.webappall.base.dto.DummyWebResponse;
 import com.and.demo.webappall.base.dto.JobForm;
 import com.and.demo.webappall.base.dto.JobSearchForm;
 import com.and.demo.webappall.base.service.JobManagementService;
@@ -15,10 +16,18 @@ public class TodoAppRestController {
     @Autowired
     JobManagementService jobManagementService;
 
-    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/greeting", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     @ResponseBody
-    public String handleGreeting() {
-        return "greeting";
+    public DummyWebResponse handleGreeting() {
+        return new DummyWebResponse("message from /api/greeting");
+    }
+
+
+    @RequestMapping(value = "/webapi/greeting", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public DummyWebResponse handleGreetingWeb() {
+
+        return new DummyWebResponse("message from /webapi/greeting");
     }
 
     @RequestMapping(value = "/api/getAllJobs", method = RequestMethod.GET,produces = "application/json; charset=utf-8")
