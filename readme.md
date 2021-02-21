@@ -20,4 +20,5 @@ For Memorization of the how-to of commonly used elements in Spring Boot
 9. Mongodb CRUD : \src\main\java\com\and\demo\webappall\mongo<br/> 
 10. Internationalization : \src\main\java\com\and\demo\webappall\config\WebMvcConfig.java<br/> 
 11. Jquery AJAX with CSRF header support : login.html<br/> 
+12. Spring test with MockMVC : \src\test\java\com\and\demo\webappall\WebappallApplicationTests.java <br/> 
 ![alt text](https://github.com/andersonchau/spring_boot_demo/blob/master/screenshot.png?raw=true)
